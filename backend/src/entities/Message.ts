@@ -8,14 +8,17 @@ export class Message {
   id: string;
 
   @ManyToOne(() => Conversation, conversation => conversation.messages, { nullable: false })
-  conversation: Conversation;
+  conversationId: Conversation;
 
   @ManyToOne(() => User, user => user.sentMessages, { nullable: false, eager: true })
-  sender: User;
+  senderId: User;
 
   @Column()
   content: string;
 
   @CreateDateColumn()
   timestamp: Date;
+
+  @CreateDateColumn()
+  seenBy: User[];
 }
