@@ -7,29 +7,46 @@ import conversationRoutes from "./routes/conversation.routes";
 import messageRoutes from "./routes/message.routes";
 import "reflect-metadata";
 import { AppDataSource } from "./data-source";
-import "reflect-metadata";
-
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./config/swagger";
+import swaggerJSDoc from "swagger-jsdoc";
 
 dotenv.config();
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
 
+export const swaggerSpec = swaggerJSDoc({
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "API Chat",
+      version: "1.0.0",
+      description: "Documentação da API do projeto Chat",
+    },
+  },
+  apis: ["./src/routes/*.ts"], // aponta para os arquivos com as rotas comentadas
+});
+
 app.use(express.json());
+
+// Registra as rotas da API
 app.use("/api/users", userRoutes);
 app.use("/api/conversations", conversationRoutes);
 app.use("/api/messages", messageRoutes);
 
-const PORT = process.env.PORT || 3001;
-server.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-});
+// Registra a rota do Swagger para documentação
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+const PORT = process.env.PORT || 3001;
+
+// Inicializa o banco e depois inicia o servidor HTTP (com Socket.IO)
 AppDataSource.initialize().then(() => {
   console.log("✅ Database connected");
 
-  app.listen(PORT, () => {
+  server.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
+    console.log(`📚 Swagger docs available at http://localhost:${PORT}/api-docs`);
   });
 }).catch((err) => {
   console.error("❌ Error connecting to database", err);

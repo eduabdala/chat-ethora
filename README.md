@@ -21,7 +21,7 @@ chat-ethora/
 ## Primeiros passos
 
 ```bash
-git clone https://seu-repositorio/chat-ethora.git
+git clone https://eduabdala/chat-ethora.git
 cd chat-ethora
 ```
 
