@@ -7,8 +7,9 @@ Sistema de chat simples usando Node.js + Express no backend e uma aplicação fr
 ```
 chat-ethora/
 │
-├── backend/       # Backend Node.js + Express + TypeORM
-├── frontend/      # Frontend (React ou outro framework)
+├── backend/       # Backend TypeScript + Express + TypeORM
+├── database/      # Database PostgreSQL
+├── frontend/      # Frontend (React ou algum framework)
 └── README.md      # Este arquivo
 ```
 
