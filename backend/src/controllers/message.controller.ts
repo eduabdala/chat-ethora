@@ -6,7 +6,7 @@ let messages: Message[] = [];
 
 export const getMessagesByConversation = (req: Request, res: Response) => {
   const { conversationId } = req.params;
-  const convMessages = messages.filter(m => m.conversationId === conversationId);
+  const convMessages = messages.filter(m => m.id === conversationId);
   res.json(convMessages);
 };
 
@@ -23,7 +23,7 @@ export const sendMessage = (req: Request, res: Response) => {
     senderId,
     content,
     timestamp: new Date(),
-    seenBy: [senderId], // o remetente já viu a própria mensagem
+    seenBy: [senderId],
   };
 
   messages.push(newMessage);

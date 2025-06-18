@@ -30,6 +30,7 @@ export const createConversation = (req: Request, res: Response) => {
     name: isGroup ? name : undefined,
     participants,
     createdAt: new Date(),
+    messages: []
   };
 
   conversations.push(newConversation);
