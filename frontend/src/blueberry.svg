@@ -1,0 +1,18 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#89CFF0" />
+      <stop offset="100%" stop-color="#B39DDB" />
+    </linearGradient>
+  </defs>
+  <!-- Chat bubble outline -->
+  <rect x="10" y="10" width="180" height="140" rx="20" ry="20"
+        fill="none" stroke="url(#grad)" stroke-width="16" />
+  <!-- Tail of the bubble -->
+  <polygon points="60,150 60,180 80,150" fill="url(#grad)" />
+  <!-- Blueberry circle -->
+  <circle cx="100" cy="80" r="40" fill="url(#grad)" />
+  <!-- Leaves -->
+  <ellipse cx="85" cy="40" rx="12" ry="20" fill="url(#grad)" transform="rotate(-20 85 40)" />
+  <ellipse cx="115" cy="40" rx="12" ry="20" fill="url(#grad)" transform="rotate(20 115 40)" />
+</svg>
