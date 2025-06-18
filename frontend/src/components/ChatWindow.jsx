@@ -1,4 +1,3 @@
-import React from 'react';
 import MessageList from './MessageList.jsx';
 import MessageInput from './MessageInput.jsx';
 import '../styles/ChatWindow.css';

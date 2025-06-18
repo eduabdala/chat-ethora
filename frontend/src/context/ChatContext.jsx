@@ -8,7 +8,6 @@ export const ChatProvider = ({ children }) => {
   const sendMessage = (text) => {
     const newMsg = { id: Date.now(), text, sender: 'user' };
     setMessages((prev) => [...prev, newMsg]);
-    // TODO: forward to backend or bot logic
   };
 
   return (

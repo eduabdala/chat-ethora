@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import '../styles/Login.css';
 
-const Login = ({ onLogin }) => {
+const Login = ({ onLogin, onSwitch }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Placeholder: you can add real auth logic here
     if (username && password) {
       onLogin({ username });
     }
@@ -32,6 +31,10 @@ const Login = ({ onLogin }) => {
           required
         />
         <button type="submit">Enter</button>
+        <p style={{ textAlign: 'center', marginTop: '1rem' }}>
+          Don't have an account?{' '}
+          <button type="button" onClick={onSwitch}>Sign Up</button>
+        </p>
       </form>
     </div>
   );
