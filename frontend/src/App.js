@@ -1,24 +1,19 @@
-import logo from './logo.svg'
-import './App.css';
+import React, { useState } from 'react';
+import { ChatProvider } from './context/ChatContext';
+import ChatWindow from './components/ChatWindow.jsx';
+import Login from './components/Login.jsx';
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  const handleLogin = (userData) => {
+    setUser(userData);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChatProvider>
+      {user ? <ChatWindow /> : <Login onLogin={handleLogin} />}
+    </ChatProvider>
   );
 }
 
