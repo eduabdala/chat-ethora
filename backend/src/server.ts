@@ -24,6 +24,10 @@ export const swaggerSpec = swaggerJSDoc({
       version: "1.0.0",
       description: "Documentação da API do projeto Chat",
     },
+    servers: 
+    {
+      url: "http://localhost:3001/api/",
+    },
   },
   apis: ["./src/routes/*.ts"], // aponta para os arquivos com as rotas comentadas
 });
@@ -31,9 +35,9 @@ export const swaggerSpec = swaggerJSDoc({
 app.use(express.json());
 
 // Registra as rotas da API
-app.use("/api/users", userRoutes);
-app.use("/api/conversations", conversationRoutes);
-app.use("/api/messages", messageRoutes);
+app.use("/users", userRoutes);
+app.use("/conversations", conversationRoutes);
+app.use("/messages", messageRoutes);
 
 // Registra a rota do Swagger para documentação
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
