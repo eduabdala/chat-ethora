@@ -1,4 +1,3 @@
-// src/components/Sidebar.jsx
 import React, { useState } from "react";
 import { useChat } from "../context/ChatContext";
 import "../styles/Sidebar.css";
@@ -17,7 +16,6 @@ export default function Sidebar() {
 
   return (
     <div className={`sidebar ${collapsed ? "collapsed" : ""}`}>
-      {/* collapse toggle */}
       <button
         className="collapse-btn"
         onClick={() => setCollapsed((c) => !c)}
@@ -26,7 +24,6 @@ export default function Sidebar() {
         {collapsed ? "→" : "←"}
       </button>
 
-      {/* only show title, list and form when expanded */}
       {!collapsed && (
         <>
           <h2>Chats</h2>
