@@ -1,16 +1,21 @@
-import { useChat } from '../hooks/useChat';
+import React, { useEffect, useRef } from "react";
 
-const MessageList = () => {
-  const { messages } = useChat();
+export default function MessageList({ messages }) {
+  const listRef = useRef();
+
+  useEffect(() => {
+    if (listRef.current) {
+      listRef.current.scrollTop = listRef.current.scrollHeight;
+    }
+  }, [messages]);
+
   return (
-    <ul className="message-list">
-      {messages.map((msg) => (
-        <li key={msg.id} className={`message ${msg.sender}`}>
-          {msg.text}
-        </li>
+    <div ref={listRef} className="message-list">
+      {messages.map((m, i) => (
+        <div key={i} className="message-item">
+          {m.text}
+        </div>
       ))}
-    </ul>
+    </div>
   );
-};
-
-export default MessageList;
+}
