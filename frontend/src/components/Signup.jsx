@@ -13,10 +13,9 @@ const Signup = ({ onSignup, onSwitch }) => {
     setError(null);
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:3001/users', {
+      const response = await fetch('/users', {
         method: 'POST',
         headers: {
-          'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ name, email, photoUrl: '', bio })
