@@ -4,6 +4,7 @@ import '../styles/Signup.css';
 const Signup = ({ onSignup, onSwitch }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [bio, setBio] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -13,12 +14,13 @@ const Signup = ({ onSignup, onSwitch }) => {
     setError(null);
     setLoading(true);
     try {
-      const response = await fetch('/users', {
+      const response = await fetch('http://localhost:3001/users', {
         method: 'POST',
         headers: {
+          'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, email, photoUrl: '', bio })
+        body: JSON.stringify({ name, email, password, photoUrl: '', bio })
       });
       if (!response.ok) throw new Error(`Error ${response.status}`);
       const user = await response.json();
@@ -46,6 +48,13 @@ const Signup = ({ onSignup, onSwitch }) => {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           required
         />
         <textarea

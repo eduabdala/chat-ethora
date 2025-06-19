@@ -8,7 +8,7 @@ const Login = ({ onLogin, onSwitch }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username && password) {
-      onLogin({ username });
+      onLogin({ username, password });
     }
   };
 
@@ -38,6 +38,5 @@ const Login = ({ onLogin, onSwitch }) => {
       </form>
     </div>
   );
-};
-
+}
 export default Login;
