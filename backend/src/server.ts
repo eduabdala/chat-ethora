@@ -2,6 +2,7 @@ import express from "express";
 import http from "http";
 import { Server } from "socket.io";
 import dotenv from "dotenv";
+import cors from "cors"; // <-- AQUI
 import userRoutes from "./routes/user.routes";
 import conversationRoutes from "./routes/conversation.routes";
 import messageRoutes from "./routes/message.routes";
@@ -14,6 +15,13 @@ import swaggerJSDoc from "swagger-jsdoc";
 dotenv.config();
 const app = express();
 const server = http.createServer(app);
+
+app.use(cors({
+  origin: "http://localhost:3000",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
 const io = new Server(server, { cors: { origin: "*" } });
 
 export const swaggerSpec = swaggerJSDoc({
@@ -24,27 +32,22 @@ export const swaggerSpec = swaggerJSDoc({
       version: "1.0.0",
       description: "Documentação da API do projeto Chat",
     },
-    servers: 
-    {
+    servers: {
       url: "http://localhost:3001/api/",
     },
   },
-  apis: ["./src/routes/*.ts"], // aponta para os arquivos com as rotas comentadas
+  apis: ["./src/routes/*.ts"],
 });
 
 app.use(express.json());
 
-// Registra as rotas da API
 app.use("/users", userRoutes);
 app.use("/conversations", conversationRoutes);
 app.use("/messages", messageRoutes);
-
-// Registra a rota do Swagger para documentação
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 const PORT = process.env.PORT || 3001;
 
-// Inicializa o banco e depois inicia o servidor HTTP (com Socket.IO)
 AppDataSource.initialize().then(() => {
   console.log("✅ Database connected");
 
