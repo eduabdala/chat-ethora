@@ -1,12 +1,21 @@
-import MessageList from './MessageList.jsx';
-import MessageInput from './MessageInput.jsx';
-import '../styles/ChatWindow.css';
+import React from "react";
+import { useChat } from "../context/ChatContext";
+import MessageList from "./MessageList";
+import MessageInput from "./MessageInput";
+import "../styles/ChatWindow.css";
 
-const ChatWindow = () => (
-  <div className="chat-window">
-    <MessageList />
-    <MessageInput />
-  </div>
-);
+export default function ChatWindow() {
+  const { currentChat, postMessage } = useChat();
 
-export default ChatWindow;
+  if (!currentChat) {
+    return <div className="chat-window">Select or create a chat to begin.</div>;
+  }
+
+  return (
+    <div className="chat-window">
+      <header className="chat-header">{currentChat.name}</header>
+      <MessageList messages={currentChat.messages} />
+      <MessageInput onSend={postMessage} />
+    </div>
+  );
+}
