@@ -1,0 +1,151 @@
+/* styles/Sidebar.css */
+
+:root {
+  --sidebar-bg: #ffffff;
+  --sidebar-border: #e0e0e0;
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 60px;
+  --accent-color: #5a67d8;
+  --text-color: #333;
+  --hover-bg: #f5f5f5;
+  --shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Base sidebar */
+.sidebar {
+  position: relative;
+  width: var(--sidebar-width);
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-border);
+  box-shadow: var(--shadow);
+  transition: width 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.sidebar.collapsed {
+  width: var(--sidebar-collapsed-width);
+}
+
+/* Collapse/expand button */
+.collapse-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--sidebar-bg);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  
+  /* hide any text you’ve put in JSX */
+  font-size: 0;
+  line-height: 0;
+  color: transparent;
+  
+  /* allow arrow to rotate */
+  transition: transform 0.3s ease;
+}
+
+/* draw exactly one arrow */
+.collapse-btn::before {
+  content: "←";
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--text-color);
+  display: block;
+  transform-origin: center;
+}
+
+/* flip that arrow when collapsed */
+.sidebar.collapsed .collapse-btn {
+  transform: rotate(180deg);
+}
+
+/* hide contents when collapsed */
+.sidebar.collapsed h2,
+.sidebar.collapsed .chat-list,
+.sidebar.collapsed .new-chat-form {
+  display: none;
+}
+
+/* Header */
+.sidebar h2 {
+  margin: 1rem 0;
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Chat list */
+.chat-list {
+  flex: 1;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+}
+.chat-list li {
+  list-style: none;
+  margin: 0.5rem 0;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.chat-list li:hover {
+  background-color: var(--hover-bg);
+}
+.chat-list li.active {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+/* New-chat form */
+.new-chat-form {
+  display: flex;
+  padding: 1rem;
+  border-top: 1px solid var(--sidebar-border);
+}
+.new-chat-form input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--sidebar-border);
+  border-radius: 4px 0 0 4px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.new-chat-form input:focus {
+  border-color: var(--accent-color);
+}
+.new-chat-form button {
+  padding: 0 1rem;
+  border: 1px solid var(--sidebar-border);
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+  background-color: var(--accent-color);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.new-chat-form button:hover {
+  background-color: #434190;
+}
+
+/* Custom scrollbar (WebKit) */
+.chat-list::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chat-list::-webkit-scrollbar-thumb {
+  background-color: var(--hover-bg);
+  border-radius: 3px;
+}
