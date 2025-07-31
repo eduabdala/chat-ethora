@@ -1,15 +1,16 @@
 # Chat Ethora
 
-Sistema de chat simples usando Node.js + Express no backend e uma aplicação frontend separada.
+Sistema de chat simples utilizando **Python + FastAPI** no backend e uma aplicação frontend utilizando **React.js**.
 
 ## Estrutura
 
 ```
 chat-ethora/
 │
-├── backend/       # Backend TypeScript + Express + TypeORM
+├── backend/       # Backend Python + FastAPI + SQLAlchemy
 ├── database/      # Database PostgreSQL
-├── frontend/      # Frontend (React ou algum framework)
+├── docs/          # Documentação do projeto, diagramas e etc
+├── frontend/      # Frontend (React.js)
 └── README.md      # Este arquivo
 ```
 
@@ -17,7 +18,8 @@ chat-ethora/
 
 - Node.js (versão 18+ recomendada)
 - Yarn ou npm
-- Docker (opcional, para banco de dados)
+- Python 3.10+
+- Docker (opcional, para o banco de dados PostgreSQL)
 
 ## Primeiros passos
 
@@ -30,9 +32,18 @@ cd chat-ethora
 
 ```bash
 cd backend
+python -m venv venv
+source venv/bin/activate  # Linux/macOS
+venv\Scripts\activate     # Windows
+
+pip install -r requirements.txt
+
+# Criar variáveis de ambiente
 cp .env.example .env
-yarn install
-yarn dev
+
+# Rodar o servidor
+uvicorn app.main:app --reload
+
 ```
 
 ### Inicializar Frontend
@@ -42,3 +53,7 @@ cd frontend
 yarn install
 yarn start
 ```
+
+## Documentação
+
+A documentação do projeto (modelos de dados, diagramas, endpoints etc.) está na pasta docs/.
