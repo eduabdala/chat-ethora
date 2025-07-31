@@ -9,6 +9,7 @@ import {
 } from "typeorm";
 import { Message } from "./Message";
 import { Conversation } from "./Conversation";
+import { Participant } from "./Participant";
 
 /**
  * Represents a user in the system.
@@ -28,13 +29,19 @@ export class User {
   @Column({ unique: true })
   email!: string;
 
+  @Column({ unique: true })
+  password!: string;
+
   /** Optional URL to the user's profile photo */
   @Column({ nullable: true })
-  photoUrl?: string;
+  profilePhoto?: string;
 
   /** Optional biography of the user */
   @Column({ nullable: true })
   bio?: string;
+
+  @OneToMany(() => Participant, participant => participant.user)
+  participantEntries!: Participant[];
 
   /** Conversations in which the user participates (many-to-many) */
   @ManyToMany(() => Conversation, conversation => conversation.participants)

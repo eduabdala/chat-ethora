@@ -3,12 +3,10 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  ManyToMany,
-  JoinTable,
   OneToMany,
 } from "typeorm";
-import { User } from "./User";
 import { Message } from "./Message";
+import { Participant } from "./Participant";
 
 /**
  * Represents a chat conversation, which can be a group or private chat.
@@ -21,23 +19,24 @@ export class Conversation {
 
   /** Whether the conversation is a group chat */
   @Column()
-  isGroup!: boolean;
+  conversationType!: boolean;
 
   /** Optional name for the conversation (mainly for groups) */
   @Column({ nullable: true })
   name?: string;
 
+  /** Optional profile photo for the conversation */
+  @Column({ nullable: true })
+  conversationPhoto?: string;
+
   /**
-   * Users participating in this conversation
-   * Many-to-many relationship with User
+   * Participants in this conversation (one-to-many with Participant)
    */
-  @ManyToMany(() => User, user => user.conversations)
-  @JoinTable()
-  participants!: User[];
+  @OneToMany(() => Participant, participant => participant.conversation)
+  participants!: Participant[];
 
   /**
    * Messages that belong to this conversation
-   * One-to-many relationship
    */
   @OneToMany(() => Message, message => message.conversation)
   messages!: Message[];

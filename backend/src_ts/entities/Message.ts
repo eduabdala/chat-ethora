@@ -3,6 +3,7 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  UpdateDateColumn,
   ManyToOne,
   ManyToMany,
   JoinTable,
@@ -33,7 +34,11 @@ export class Message {
 
   /** Timestamp of when the message was created */
   @CreateDateColumn()
-  timestamp!: Date;
+  sendAt!: Date;
+
+  /** Timestamp of the message edition */
+  @UpdateDateColumn()
+  updatedAt!: Date;
 
   /**
    * Users who have seen this message

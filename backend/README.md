@@ -1,49 +1,64 @@
 # Chat Ethora - Backend
 
-API REST construída com:
-- Node.js
-- Express
-- TypeORM
+API REST reescrita em Python utilizando o framework **FastAPI**.
+
+## Tecnologias utilizadas
+
+- Python 3.11+
+- FastAPI
+- Uvicorn
+- SQLAlchemy
 - SQLite (ou PostgreSQL, configurável)
+- Python-dotenv
 
 ## Instalação
 
 ```bash
 cd backend
-yarn install
+python -m venv venv
+source venv/bin/activate  # ou venv\Scripts\activate no Windows
+pip install -r requirements.txt
 cp .env.example .env
 ```
 
 ### Configurar Banco de Dados
 
-Por padrão, o projeto usa SQLite. Se quiser usar PostgreSQL, configure as variáveis em `.env`.
+Por padrão, o projeto utiliza SQLite. Para usar PostgreSQL, edite o arquivo `.env`:
 
 ```env
-TYPEORM_CONNECTION=sqlite
-TYPEORM_DATABASE=./db.sqlite
+DATABASE_URL=sqlite:///./db.sqlite
 # ou para PostgreSQL:
-# TYPEORM_CONNECTION=postgres
-# TYPEORM_HOST=localhost
-# TYPEORM_PORT=5432
-# TYPEORM_USERNAME=postgres
-# TYPEORM_PASSWORD=postgres
-# TYPEORM_DATABASE=chatdb
+# DATABASE_URL=postgresql+asyncpg://usuario:senha@localhost:5432/chatdb
 ```
 
-### Comandos
+### Executar aplicação
 
 ```bash
-yarn dev         # Executa em modo desenvolvimento
-yarn typeorm migration:run  # Aplica as migrações
+uvicorn main:app --reload
 ```
 
-## Rotas disponíveis
+### Aplicar migrações
+
+Este projeto utiliza `alembic` para controle de versões do banco:
+
+```bash
+alembic upgrade head
+```
+
+## Endpoints disponíveis
 
 - `GET    /api/users`
 - `POST   /api/users`
 - `GET    /api/conversations`
 - `POST   /api/conversations`
-- `GET    /api/conversations/:id`
-- `GET    /api/conversations/:conversationId/messages`
-- `POST   /api/conversations/:conversationId/messages`
-- `POST   /api/conversations/:conversationId/messages/seen`
+- `GET    /api/conversations/{id}`
+- `GET    /api/conversations/{conversation_id}/messages`
+- `POST   /api/conversations/{conversation_id}/messages`
+- `POST   /api/conversations/{conversation_id}/messages/seen`
+
+## Documentação automática
+
+Acesse a documentação interativa gerada automaticamente pelo FastAPI:
+
+- Swagger UI: [http://localhost:8000/docs](http://localhost:8000/docs)
+- ReDoc: [http://localhost:8000/redoc](http://localhost:8000/redoc)
