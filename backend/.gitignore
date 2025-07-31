@@ -2,3 +2,4 @@
 src/migrations/
 node_modules
 venv
+__pycache__
