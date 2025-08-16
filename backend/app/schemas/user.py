@@ -1,40 +1,23 @@
-from pydantic import BaseModel, EmailStr
 from typing import Optional
-from uuid import UUID
+from uuid import uuid4, UUID
 from datetime import datetime
+from sqlmodel import SQLModel, Field
+from pydantic import EmailStr
 
-class UserBase(BaseModel):
+class User(SQLModel, table=True):
     """
-    Schema base para um usuário.
-    Contém campos compartilhados entre criação, leitura e atualização.
+    Modelo de usuário que atua como:
+    - ORM (tabela do banco via SQLAlchemy)
+    - Schema Pydantic para validação
+    - Suporta criação, leitura e atualização
     """
-    username: str
-    email: EmailStr
 
-class UserCreate(UserBase):
-    """
-    Schema para criação de usuário.
-    Inclui senha como campo obrigatório.
-    """
-    password: str
-
-class UserRead(UserBase):
-    """
-    Schema para leitura de usuário.
-    Inclui ID e timestamps.
-    """
-    id: UUID
-    created_at: datetime
-    updated_at: datetime
+    id: UUID = Field(default_factory=uuid4, primary_key=True, index=True)
+    username: str = Field(index=True, nullable=False)
+    email: EmailStr = Field(unique=True, nullable=False)
+    password: Optional[str] = Field(default=None, nullable=True)
+    created_at: datetime = Field(default_factory=datetime.utcnow, nullable=False)
+    updated_at: datetime = Field(default_factory=datetime.utcnow, nullable=False)
 
     class Config:
-        orm_mode = True
-
-class UserUpdate(BaseModel):
-    """
-    Schema para atualização parcial de usuário.
-    Todos os campos são opcionais.
-    """
-    username: Optional[str] = None
-    email: Optional[EmailStr] = None
-    password: Optional[str] = None
+        from_attributes = True

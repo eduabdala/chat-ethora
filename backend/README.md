@@ -34,7 +34,7 @@ DATABASE_URL=sqlite:///./db.sqlite
 ### Executar aplicação
 
 ```bash
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
 ### Aplicar migrações
