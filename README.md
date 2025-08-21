@@ -1,32 +1,62 @@
 # Chat Ethora
 
-Sistema de chat simples usando Node.js + Express no backend e uma aplicação frontend separada.
+<!-- Badges -->
 
-## Estrutura
+![Project Status](https://img.shields.io/badge/status-paused-orange)
+![Version](https://img.shields.io/badge/version-0.1.0-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Build](https://img.shields.io/badge/build-unavailable-red)
+
+---
+
+## Description
+
+Chat Ethora is a simple chat system using Node.js + Express for the backend and a separate frontend application.
+
+---
+
+## Table of Contents
+
+* [Project Structure](#project-structure)
+* [Requirements](#requirements)
+* [Getting Started](#getting-started)
+* [Backend Setup](#backend-setup)
+* [Frontend Setup](#frontend-setup)
+* [Contact](#contact)
+
+---
+
+## Project Structure
 
 ```
 chat-ethora/
 │
 ├── backend/       # Backend TypeScript + Express + TypeORM
-├── database/      # Database PostgreSQL
-├── frontend/      # Frontend (React ou algum framework)
-└── README.md      # Este arquivo
+├── database/      # PostgreSQL Database
+├── frontend/      # Frontend (React or any framework)
+└── README.md      # This file
 ```
 
-## Requisitos
+---
 
-- Node.js (versão 18+ recomendada)
-- Yarn ou npm
-- Docker (opcional, para banco de dados)
+## Requirements
 
-## Primeiros passos
+* Node.js (recommended version 18+)
+* Yarn or npm
+* Docker (optional, for database)
+
+---
+
+## Getting Started
 
 ```bash
-git clone https://eduabdala/chat-ethora.git
+git clone https://github.com/eduabdala/chat-ethora.git
 cd chat-ethora
 ```
 
-### Inicializar Backend
+---
+
+## Backend Setup
 
 ```bash
 cd backend
@@ -35,10 +65,25 @@ yarn install
 yarn dev
 ```
 
-### Inicializar Frontend
+---
+
+## Frontend Setup
 
 ```bash
 cd frontend
 yarn install
 yarn start
 ```
+
+---
+
+## Contact
+
+* GitHub: [eduabdala](https://github.com/eduabdala)
+* Email: [eduardoabdala9@outlook.com](mailto:eduardoabdala9@outlook.com)
+
+---
+
+<!-- Personal Notes -->
+
+> Keep the README updated with badges, version, and project status.
