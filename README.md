@@ -2,7 +2,7 @@
 
 <!-- Badges -->
 
-![Project Status](https://img.shields.io/badge/status-paused-orange)
+![Project Status](https://img.shields.io/badge/status-stopped-red)
 ![Version](https://img.shields.io/badge/version-0.1.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Build](https://img.shields.io/badge/build-unavailable-red)
